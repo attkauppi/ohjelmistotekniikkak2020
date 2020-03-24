@@ -67,4 +67,26 @@ public class MaksukorttiTest {
         
         assertEquals("Kortilla on rahaa 7.5 euroa", k.toString());
     }
+    
+    @Test
+    public void syoMaukkaastiVahentaaSaldoaOikein() {
+        Maksukortti k = new Maksukortti(10);
+        
+        k.syoMaukkaasti();
+        
+        assertEquals("Kortilla on rahaa 6.0 euroa", k.toString());        
+    }
+    
+    @Test
+    public void syoEdullisestiEiVieSaldoaNegatiiviseksi() {
+        Maksukortti k = new Maksukortti(10);
+        
+        k.syoMaukkaasti();
+        k.syoMaukkaasti();
+        // Kortin saldo on 2 ja edullisen hinta on 2.5
+        k.syoEdullisesti();
+        
+        assertEquals("Kortilla on rahaa 2.0 euroa", k.toString());
+        
+    }
 }
