@@ -21,30 +21,23 @@ import static org.junit.Assert.*;
  */
 public class MaksukorttiTest {
     
-    public MaksukorttiTest() {
-    }
     
-    @BeforeClass
-    public static void setUpClass() {
-        
-    }
+    //Testiluokan konstruktori sekä metodit setUpClass
+    //(suoritetaan ennen kuin testaus aloitetaan), 
+    //tearDownClass (suoritetaan testauksen päätyttyä) 
+    //ja tearDown (suoritetaan jokaisen testin jälkeen) 
+    //on poistettu sillä testimme ei niitä tarvitse.
     
-    @AfterClass
-    public static void tearDownClass() {        
-    }
+    Maksukortti kortti;
     
     @Before
     public void setUp() {
+        // Suoritetaan ennen jokaista testitapausta, kun 
+        // käytetään before-merkintää
+        kortti = new Maksukortti(10);
     }
     
-    @After
-    public void tearDown() {
-    }
-    // TODO add test methods here.
-    // The methods must be annotated with annotation @Test. For example:
-    //
-    @Test
-    public void hello() {}
+
     
     @Test
     public void konstruktoriAsettaaSaldonOikein() {
@@ -87,6 +80,33 @@ public class MaksukorttiTest {
         k.syoEdullisesti();
         
         assertEquals("Kortilla on rahaa 2.0 euroa", k.toString());
-        
     }
+    
+    @Test
+    public void kortilleVoiLadataRahaa() {
+        kortti.lataaRahaa(25);
+        assertEquals("Kortilla on rahaa 35.0 euroa", kortti.toString());
+    }
+    
+    @Test
+    public void kortinSaldoEiYlitaMaksimiarvoa() {
+        kortti.lataaRahaa(200);
+        assertEquals("Kortilla on rahaa 150.0 euroa", kortti.toString());
+    }
+    
+    // Jäivät turhiksi, mutta rakenne tässä:
+    //@BeforeClass
+//    public static void setUpClass() {
+//    }
+//    @AfterClass
+//    public static void tearDownClass() {        
+//    }
+//    @After
+//    public void tearDown() {
+//    }
+//    // TODO add test methods here.
+//    // The methods must be annotated with annotation @Test. For example:
+//    //
+//    @Test
+//    public void hello() {}
 }
