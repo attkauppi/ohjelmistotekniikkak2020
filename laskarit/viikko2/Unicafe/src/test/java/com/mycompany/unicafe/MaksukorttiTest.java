@@ -35,4 +35,22 @@ public class MaksukorttiTest {
         kortti2.lataaRahaa(10);
         assertEquals("Kortilla on rahaa 20.0 euroa", kortti2.toString());
     }
+    
+    
+    public void ottaminenToimiiOikein() {
+        
+    }
+    
+    @Test
+    public void saldoVaheneeKunRahaaTarpeeksi() {
+        kortti.otaRahaa(5);
+        
+        assertEquals("Kortilla on rahaa 5.0 euroa", kortti.toString());
+    }
+    
+    @Test
+    public void saldoEiVaheneKunRahaaLiianVahan() {
+        kortti.otaRahaa(50);
+        assertEquals("Kortilla on rahaa 10.0 euroa", kortti.toString());
+    }
 }
